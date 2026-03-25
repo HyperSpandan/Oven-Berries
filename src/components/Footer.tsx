@@ -19,7 +19,7 @@ export default function Footer() {
               className="flex items-center gap-6 mb-10"
             >
               <Logo className="w-16 h-16" color="var(--color-cream)" />
-              <h3 className="text-6xl font-display italic font-black tracking-tighter">
+              <h3 className="text-4xl md:text-6xl font-display italic font-black tracking-tighter">
                 OVEN BERRIES
               </h3>
             </motion.div>

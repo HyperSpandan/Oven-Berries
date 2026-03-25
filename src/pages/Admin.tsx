@@ -95,12 +95,12 @@ export default function Admin() {
   };
 
   return (
-    <div className="pt-40 pb-24 min-h-screen bg-cream">
+    <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40 mb-3 block">Management</span>
-            <h1 className="text-6xl font-display italic font-bold text-berry tracking-tighter">Admin <br /> <span className="text-berry/30">Dashboard.</span></h1>
+            <h1 className="text-5xl md:text-6xl font-display italic font-bold text-berry tracking-tighter">Admin <br /> <span className="text-berry/30">Dashboard.</span></h1>
           </div>
           
           <div className="flex p-2 bg-white rounded-[2rem] shadow-xl border border-berry/5">
@@ -135,7 +135,7 @@ export default function Admin() {
                 </div>
               ) : (
                 bookings.map((booking) => (
-                  <div key={booking.id} className="bg-white p-8 md:p-10 rounded-[3rem] shadow-xl border border-berry/5 flex flex-col md:flex-row md:items-center gap-10">
+                  <div key={booking.id} className="bg-white p-6 md:p-10 rounded-[3rem] shadow-xl border border-berry/5 flex flex-col md:flex-row md:items-center gap-10">
                     <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-8">
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-berry/40 mb-2">Customer</p>
@@ -207,7 +207,7 @@ export default function Admin() {
                 </div>
               ) : (
                 orders.map((order) => (
-                  <div key={order.id} className="bg-white p-8 md:p-10 rounded-[3rem] shadow-xl border border-berry/5">
+                  <div key={order.id} className="bg-white p-6 md:p-10 rounded-[3rem] shadow-xl border border-berry/5">
                     <div className="flex flex-col md:flex-row md:items-center gap-10 mb-8 pb-8 border-b border-berry/5">
                       <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div>

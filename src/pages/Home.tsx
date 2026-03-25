@@ -92,7 +92,7 @@ export default function Home() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-berry/10 text-[10px] font-bold uppercase tracking-[0.3em] text-berry mb-8">
               Est. 2025 • Nanded
             </span>
-            <h1 className="text-[15vw] md:text-[12vw] font-display italic font-black leading-[0.85] tracking-[-0.04em] mb-12 text-berry mix-blend-multiply">
+            <h1 className="text-[18vw] md:text-[12vw] font-display italic font-black leading-[0.85] tracking-[-0.04em] mb-12 text-berry mix-blend-multiply">
               Oven <br /> Berries
             </h1>
             
@@ -130,7 +130,7 @@ export default function Home() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-6xl md:text-7xl font-display italic font-bold leading-tight mb-8 text-berry">
+                <h2 className="text-5xl md:text-7xl font-display italic font-bold leading-tight mb-8 text-berry">
                   Crafted for <br /> the <span className="text-oven">Aesthetic</span> <br /> Soul.
                 </h2>
                 <p className="text-xl text-sage font-medium leading-relaxed mb-12">
@@ -184,7 +184,7 @@ export default function Home() {
             className="mb-16"
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6 block">The Art of Brewing</span>
-            <h2 className="text-6xl md:text-8xl font-display italic font-bold tracking-tighter leading-none">Manual Craftsmanship.</h2>
+            <h2 className="text-4xl md:text-8xl font-display italic font-bold tracking-tighter leading-none">Manual Craftsmanship.</h2>
           </motion.div>
           
           <div className="relative aspect-video rounded-[4rem] overflow-hidden shadow-2xl bg-berry/5 group">
@@ -224,10 +224,10 @@ export default function Home() {
             >
               The Collection
             </motion.span>
-            <h2 className="text-6xl md:text-8xl font-display italic font-bold tracking-tighter">Signature Flavors</h2>
+            <h2 className="text-5xl md:text-8xl font-display italic font-bold tracking-tighter">Signature Flavors</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-[800px]">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:h-[800px]">
             <motion.div 
               whileHover={{ scale: 0.98 }}
               className="md:col-span-2 md:row-span-2 bg-oven/20 backdrop-blur-md border border-white/10 rounded-[3rem] p-12 flex flex-col justify-end relative overflow-hidden group"
@@ -298,7 +298,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-xl">
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6 block">The Shop</span>
-              <h2 className="text-6xl font-display italic font-bold tracking-tighter leading-none">Take the <br /> Experience Home.</h2>
+              <h2 className="text-5xl md:text-6xl font-display italic font-bold tracking-tighter leading-none">Take the <br /> Experience Home.</h2>
             </div>
             <MagneticButton>
               <Link to="/shop" className="px-10 py-5 border border-black rounded-full font-bold text-sm uppercase tracking-widest hover:bg-black hover:text-white transition-all">
@@ -343,7 +343,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
             <div>
-              <h2 className="text-6xl font-display italic font-bold tracking-tighter mb-12">Visit Us</h2>
+              <h2 className="text-5xl md:text-6xl font-display italic font-bold tracking-tighter mb-12">Visit Us</h2>
               <div className="space-y-12">
                 <div className="flex gap-8">
                   <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center shrink-0">

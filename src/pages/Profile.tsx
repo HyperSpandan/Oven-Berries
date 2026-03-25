@@ -106,12 +106,12 @@ export default function Profile() {
   };
 
   return (
-    <div className="pt-40 pb-24 min-h-screen bg-cream">
+    <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl shadow-berry/5 border border-berry/5"
+          className="bg-white p-6 md:p-16 rounded-[4rem] shadow-2xl shadow-berry/5 border border-berry/5"
         >
           {/* Profile Header */}
           <div className="flex flex-col md:flex-row items-center md:items-start gap-10 mb-20">
@@ -126,7 +126,7 @@ export default function Profile() {
             </div>
             <div className="text-center md:text-left flex-1">
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40 mb-3 block">Member Profile</span>
-              <h2 className="text-5xl md:text-6xl font-display italic font-bold text-berry tracking-tighter mb-4">
+              <h2 className="text-4xl md:text-6xl font-display italic font-bold text-berry tracking-tighter mb-4">
                 {user.displayName}
               </h2>
               <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sage text-sm font-medium">

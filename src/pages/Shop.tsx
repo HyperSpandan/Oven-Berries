@@ -76,7 +76,7 @@ export default function Shop() {
   };
 
   return (
-    <div className="pt-40 pb-24 min-h-screen bg-cream">
+    <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end">
@@ -85,7 +85,7 @@ export default function Shop() {
               animate={{ opacity: 1, x: 0 }}
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40 mb-6 block">The Collection</span>
-              <h1 className="text-7xl md:text-9xl font-display italic font-bold tracking-tighter leading-[0.8] text-berry">
+              <h1 className="text-6xl md:text-9xl font-display italic font-bold tracking-tighter leading-[0.8] text-berry">
                 Take the <br /> <span className="text-berry/30">Roast</span> Home.
               </h1>
             </motion.div>

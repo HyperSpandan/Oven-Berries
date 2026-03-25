@@ -17,7 +17,12 @@
 @layer base {
   body {
     @apply bg-[#fafafa] text-black antialiased selection:bg-black selection:text-white overflow-x-hidden;
-    cursor: none;
+  }
+  
+  @media (min-width: 768px) {
+    body {
+      cursor: none;
+    }
   }
 }
 

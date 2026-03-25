@@ -30,7 +30,7 @@ export default function Menu() {
   });
 
   return (
-    <div className="pt-40 pb-24 min-h-screen bg-cream">
+    <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-24">
           <motion.div
@@ -40,7 +40,7 @@ export default function Menu() {
           >
             <div className="max-w-xl">
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40 mb-6 block">Our Menu</span>
-              <h1 className="text-6xl md:text-8xl font-display italic font-bold tracking-tighter leading-none text-berry">
+              <h1 className="text-5xl md:text-8xl font-display italic font-bold tracking-tighter leading-none text-berry">
                 Curated <br /> <span className="text-berry/30">Flavors.</span>
               </h1>
             </div>

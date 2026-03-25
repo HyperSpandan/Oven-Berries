@@ -45,7 +45,7 @@ export default function Booking() {
   };
 
   return (
-    <div className="pt-40 pb-24 min-h-screen bg-cream">
+    <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
           <motion.div
@@ -54,7 +54,7 @@ export default function Booking() {
             className="lg:col-span-5"
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40 mb-6 block">Reservations</span>
-            <h1 className="text-6xl md:text-8xl font-display italic font-bold tracking-tighter leading-[0.8] mb-12 text-berry">
+            <h1 className="text-5xl md:text-8xl font-display italic font-bold tracking-tighter leading-[0.8] mb-12 text-berry">
               Secure <br /> <span className="text-berry/30">Your Spot.</span>
             </h1>
             <p className="text-xl text-sage font-medium leading-relaxed mb-16 max-w-md">
@@ -87,7 +87,7 @@ export default function Booking() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-7 bg-white p-12 md:p-16 rounded-[4rem] shadow-2xl shadow-berry/5 border border-berry/5"
+            className="lg:col-span-7 bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl shadow-berry/5 border border-berry/5"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
