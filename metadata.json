@@ -1,0 +1,5 @@
+{
+  "name": "Oven Berries",
+  "description": "Aesthetic, minimal, and modern cafe website for Oven Berries. Features include menu access, table booking, and coffee bean shop.",
+  "requestFramePermissions": ["geolocation"]
+}

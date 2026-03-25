@@ -1,0 +1,108 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "An item on the cafe's menu.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the item" },
+        "description": { "type": "string", "description": "Description of the item" },
+        "price": { "type": "number", "description": "Price of the item" },
+        "category": { "type": "string", "description": "Category (e.g., Coffee, Bakery, Pizzeria)" },
+        "imageUrl": { "type": "string", "description": "URL to the item's image" },
+        "isAvailable": { "type": "boolean", "description": "Whether the item is currently available" }
+      },
+      "required": ["name", "price", "category"]
+    },
+    "Booking": {
+      "title": "Table Booking",
+      "description": "A reservation for a table at the cafe.",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string", "description": "Name of the customer" },
+        "customerEmail": { "type": "string", "description": "Email of the customer" },
+        "customerPhone": { "type": "string", "description": "Phone number of the customer" },
+        "date": { "type": "string", "format": "date", "description": "Date of the booking" },
+        "time": { "type": "string", "description": "Time of the booking" },
+        "guests": { "type": "integer", "description": "Number of guests" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"], "description": "Status of the booking" },
+        "userId": { "type": "string", "description": "UID of the user who made the booking" }
+      },
+      "required": ["customerName", "date", "time", "guests", "status"]
+    },
+    "CoffeeBean": {
+      "title": "Coffee Bean",
+      "description": "Coffee beans available for sale.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the coffee bean blend" },
+        "origin": { "type": "string", "description": "Origin of the beans" },
+        "roastLevel": { "type": "string", "description": "Roast level (e.g., Light, Medium, Dark)" },
+        "price": { "type": "number", "description": "Price per bag" },
+        "weight": { "type": "string", "description": "Weight of the bag (e.g., 250g, 500g)" },
+        "description": { "type": "string", "description": "Description of the flavor profile" },
+        "imageUrl": { "type": "string", "description": "URL to the product image" }
+      },
+      "required": ["name", "price", "weight"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "Information about a registered user.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string", "description": "Display name of the user" },
+        "email": { "type": "string", "description": "Email address of the user" },
+        "role": { "type": "string", "enum": ["admin", "customer"], "description": "User role" }
+      },
+      "required": ["email", "role"]
+    },
+    "Order": {
+      "title": "Customer Order",
+      "description": "An order for products or menu items.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user who placed the order" },
+        "customerName": { "type": "string", "description": "Name of the customer" },
+        "customerEmail": { "type": "string", "description": "Email of the customer" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "price": { "type": "number" },
+              "quantity": { "type": "integer" }
+            }
+          }
+        },
+        "totalAmount": { "type": "number", "description": "Total price of the order" },
+        "status": { "type": "string", "enum": ["pending", "processing", "shipped", "delivered", "cancelled"], "description": "Order status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of order creation" }
+      },
+      "required": ["userId", "items", "totalAmount", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/menu": {
+      "schema": "MenuItem",
+      "description": "Collection of menu items."
+    },
+    "/bookings": {
+      "schema": "Booking",
+      "description": "Collection of table reservations."
+    },
+    "/products": {
+      "schema": "CoffeeBean",
+      "description": "Collection of coffee beans for sale."
+    },
+    "/users": {
+      "schema": "User",
+      "description": "Collection of user profiles."
+    },
+    "/orders": {
+      "schema": "Order",
+      "description": "Collection of customer orders."
+    }
+  }
+}
