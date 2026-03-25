@@ -29,11 +29,11 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-center gap-4 text-white/40 hover:text-white transition-colors cursor-pointer group">
                 <MapPin size={20} className="group-hover:text-oven transition-colors" />
-                <span className="text-sm font-bold uppercase tracking-widest">VIP Road, Nanded, Maharashtra</span>
+                <span className="text-sm font-bold uppercase tracking-widest">ANAND NAGAR, NANDED, MAHARASTRA</span>
               </div>
               <div className="flex items-center gap-4 text-white/40 hover:text-white transition-colors cursor-pointer group">
                 <Phone size={20} className="group-hover:text-oven transition-colors" />
-                <span className="text-sm font-bold uppercase tracking-widest">+91 98765 43210</span>
+                <span className="text-sm font-bold uppercase tracking-widest">+91 9890603946</span>
               </div>
               <div className="flex items-center gap-4 text-white/40 hover:text-white transition-colors cursor-pointer group">
                 <Mail size={20} className="group-hover:text-oven transition-colors" />

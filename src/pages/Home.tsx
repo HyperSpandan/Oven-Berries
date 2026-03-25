@@ -351,7 +351,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Location</h4>
-                    <p className="text-xl font-medium max-w-xs">Anand Nagar Rd, Hyder Bagh, Nanded, Maharashtra 431605</p>
+                    <p className="text-xl font-medium max-w-xs">ANAND NAGAR, NANDED, MAHARASTRA</p>
                   </div>
                 </div>
                 <div className="flex gap-8">

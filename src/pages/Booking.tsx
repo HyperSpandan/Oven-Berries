@@ -77,7 +77,7 @@ export default function Booking() {
                 </div>
                 <div>
                   <h4 className="text-[10px] font-bold uppercase tracking-widest text-berry/40 mb-2">Concierge</h4>
-                  <p className="text-xl font-medium text-berry">+91 12345 67890</p>
+                  <p className="text-xl font-medium text-berry">+91 9890603946</p>
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function Booking() {
                     <input
                       {...register("customerPhone")}
                       className="w-full pl-14 pr-6 py-5 bg-cream/30 border-none rounded-3xl text-sm font-medium focus:ring-2 focus:ring-berry transition-all"
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 9890603946"
                     />
                   </div>
                   {errors.customerPhone && <p className="text-red-500 text-[10px] font-bold uppercase ml-1">{errors.customerPhone.message}</p>}
