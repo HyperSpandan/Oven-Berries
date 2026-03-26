@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Helmet } from "react-helmet-async";
 import { Search, Coffee, Pizza, Cake, Beer, ArrowRight } from "lucide-react";
 
 const CATEGORIES = [
@@ -31,6 +32,10 @@ export default function Menu() {
 
   return (
     <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
+      <Helmet>
+        <title>Menu | Oven Berries - Coffee, Pizza & Bakery</title>
+        <meta name="description" content="Explore the Oven Berries menu. From speciality coffee and wood-fired pizzas to artisanal bakes and refreshing beverages." />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-24">
           <motion.div

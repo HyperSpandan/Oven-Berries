@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion } from "motion/react";
+import { Helmet } from "react-helmet-async";
 import { Calendar, Users, Clock, Phone, Mail, User, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { db, auth } from "../firebase";
@@ -46,6 +47,10 @@ export default function Booking() {
 
   return (
     <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
+      <Helmet>
+        <title>Book a Table | Oven Berries Nanded</title>
+        <meta name="description" content="Reserve your spot at Oven Berries. Secure a table for an intimate date or group celebration in our aesthetic Nanded cafe." />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
           <motion.div

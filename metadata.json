@@ -1,5 +1,5 @@
 {
   "name": "Oven Berries",
-  "description": "Aesthetic, minimal, and modern cafe website for Oven Berries. Features include menu access, table booking, and coffee bean shop.",
+  "description": "Oven Berries is a speciality coffee shop, wood-fired pizzeria, and artisanal bakehouse in Anand Nagar, Nanded. Experience the aesthetic of fine dining with our curated menu and modern setting.",
   "requestFramePermissions": ["geolocation"]
 }

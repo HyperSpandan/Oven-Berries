@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
+import { Helmet } from "react-helmet-async";
 import { ShoppingBag, Star, ChevronRight, X, Trash2, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -77,6 +78,10 @@ export default function Shop() {
 
   return (
     <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
+      <Helmet>
+        <title>Shop Coffee Beans | Oven Berries Nanded</title>
+        <meta name="description" content="Bring the Oven Berries experience home. Shop our curated selection of speciality coffee beans, from dark roasts to light blends." />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end">

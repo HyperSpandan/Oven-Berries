@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "motion/react";
+import { Helmet } from "react-helmet-async";
 import { ArrowRight, Coffee, Pizza, Cake, Instagram, MapPin, Clock, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -58,6 +59,10 @@ export default function Home() {
 
   return (
     <div className="relative bg-cream">
+      <Helmet>
+        <title>Oven Berries | Speciality Coffee, Wood-fired Pizzeria & Artisanal Bakehouse</title>
+        <meta name="description" content="Experience the aesthetic of fine dining in Nanded at Oven Berries. Speciality coffee, wood-fired pizzas, and artisanal bakes in a minimal, modern setting." />
+      </Helmet>
       {/* Hero Section */}
       <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden bg-cream">
         <motion.div 

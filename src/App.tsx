@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import { useEffect, useState } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -102,26 +103,28 @@ function Login() {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="relative min-h-screen bg-cream">
-        <div className="noise" />
-        <CustomCursor />
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </main>
-        <Footer />
-        <Toaster position="bottom-right" richColors />
-      </div>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="relative min-h-screen bg-cream">
+          <div className="noise" />
+          <CustomCursor />
+          <Navbar />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/admin" element={<Admin />} />
+            </Routes>
+          </main>
+          <Footer />
+          <Toaster position="bottom-right" richColors />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
