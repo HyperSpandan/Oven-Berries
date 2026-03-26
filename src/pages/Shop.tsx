@@ -1,12 +1,13 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import { Helmet } from "react-helmet-async";
-import { ShoppingBag, Star, ChevronRight, X, Trash2, ArrowRight } from "lucide-react";
+import { ShoppingBag, Star, X, Trash2, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useRef, Suspense } from "react";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import FallingBeans3D from "../components/FallingBeans3D";
 
 const PRODUCTS = [
   { id: "1", name: "Cottage Dark Roast", price: 480, weight: "250g", origin: "Chikmagalur", roast: "Dark", description: "Bold notes of dark chocolate and roasted nuts.", image: "/coffee_beans.png" },
@@ -27,6 +28,11 @@ export default function Shop() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
   const handleAddToCart = (product: typeof PRODUCTS[0]) => {
     setCart(prev => {
@@ -77,104 +83,131 @@ export default function Shop() {
   };
 
   return (
-    <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-cream">
+    <div ref={containerRef} className="relative min-h-screen bg-cream overflow-hidden">
       <Helmet>
         <title>Shop Coffee Beans | Oven Berries Nanded</title>
         <meta name="description" content="Bring the Oven Berries experience home. Shop our curated selection of speciality coffee beans, from dark roasts to light blends." />
       </Helmet>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40 mb-6 block">The Collection</span>
-              <h1 className="text-6xl md:text-9xl font-display italic font-bold tracking-tighter leading-[0.8] text-berry">
-                Take the <br /> <span className="text-berry/30">Roast</span> Home.
-              </h1>
-            </motion.div>
-            <div className="flex flex-col gap-8">
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-sage max-w-sm text-xl leading-relaxed"
+
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center px-6 md:px-24 overflow-hidden">
+        {/* Background Radial Light */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle,rgba(255,99,33,0.1)_0%,transparent_60%)] pointer-events-none" />
+        
+        {/* 3D Falling Beans Section */}
+        <Suspense fallback={null}>
+          <FallingBeans3D />
+        </Suspense>
+
+        <div className="relative z-20 w-full text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h2 className="text-berry/60 text-lg md:text-2xl font-medium mb-4 tracking-tight">Premium Selection</h2>
+            <h1 className="text-7xl md:text-[12rem] font-display italic font-black leading-[0.8] text-oven mb-8 tracking-tighter uppercase">
+              Coffee <br /> <span className="text-berry">Beans</span>
+            </h1>
+            <p className="text-berry/60 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+              Bring the Oven Berries experience home. Discover our selection of premium coffee beans from around the world, expertly roasted for your palate.
+            </p>
+            <div className="flex items-center justify-center gap-6">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-12 py-6 bg-oven text-white rounded-full font-bold text-xs uppercase tracking-widest flex items-center gap-3 shadow-2xl shadow-oven/20 group"
               >
-                Ethically sourced, expertly roasted in small batches. Our beans bring the Oven Berries aesthetic to your kitchen.
-              </motion.p>
+                Explore Collection <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+              </motion.button>
+              
               <button 
                 onClick={() => setIsCartOpen(true)}
-                className="relative flex items-center gap-4 px-8 py-4 bg-berry text-white rounded-full font-bold text-[10px] uppercase tracking-widest self-start shadow-2xl shadow-berry/20"
+                className="p-6 bg-berry/5 border border-berry/10 text-berry rounded-full hover:bg-berry/10 transition-all relative"
               >
-                <ShoppingBag size={16} /> View Cart ({cart.length})
+                <ShoppingBag size={24} />
                 {cart.length > 0 && (
-                  <span className="absolute -top-2 -right-2 w-6 h-6 bg-oven text-white rounded-full flex items-center justify-center text-[10px]">
+                  <span className="absolute -top-1 -right-1 w-6 h-6 bg-oven text-white rounded-full flex items-center justify-center text-[10px] font-bold">
                     {cart.reduce((s, i) => s + i.quantity, 0)}
                   </span>
                 )}
               </button>
             </div>
-          </div>
-        </header>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-          {PRODUCTS.map((product, idx) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="group"
-            >
-              <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] bg-white mb-10 shadow-2xl shadow-berry/5 border border-berry/5">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-berry/0 group-hover:bg-berry/20 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <button
-                    onClick={() => handleAddToCart(product)}
-                    className="bg-white text-berry px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 shadow-2xl"
-                  >
-                    <ShoppingBag size={16} /> Add to Cart
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="text-3xl font-bold text-berry mb-2 tracking-tighter">{product.name}</h3>
-                  <div className="flex items-center gap-4">
-                    <span className="text-[10px] font-bold text-berry/40 uppercase tracking-widest">{product.origin}</span>
-                    <div className="w-1 h-1 rounded-full bg-berry/10" />
-                    <span className="text-[10px] font-bold text-berry/40 uppercase tracking-widest">{product.roast} Roast</span>
-                  </div>
-                </div>
-                <span className="text-2xl font-bold text-berry tracking-tighter">₹{product.price}</span>
-              </div>
-
-              <p className="text-sage text-sm leading-relaxed mb-8">
-                {product.description}
-              </p>
-
-              <div className="flex items-center justify-between pt-8 border-t border-berry/10">
-                <span className="text-[10px] font-bold text-berry/40 uppercase tracking-widest">{product.weight}</span>
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} size={12} className="fill-oven text-oven" />
-                    ))}
-                  </div>
-                  <span className="text-sm font-bold text-berry">4.9</span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          </motion.div>
         </div>
-      </div>
+      </section>
+
+      {/* Product Grid Section */}
+      <section id="products" className="relative z-30 px-6 md:px-24 pb-32">
+        {/* Product Grid (Existing Functionality) */}
+        <div className="mt-20">
+          <div className="flex justify-between items-end mb-20">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-oven mb-4 block">The Collection</span>
+              <h2 className="text-5xl md:text-7xl font-display italic font-bold text-berry tracking-tighter">Available <br /> <span className="text-berry/30">Roasts.</span></h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+            {PRODUCTS.map((product, idx) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="group"
+              >
+                <div className="relative aspect-[3/4] overflow-hidden rounded-[3rem] bg-berry/5 mb-10 shadow-2xl border border-berry/10">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-berry/0 group-hover:bg-berry/40 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <button
+                      onClick={() => handleAddToCart(product)}
+                      className="bg-oven text-white px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 shadow-2xl"
+                    >
+                      <ShoppingBag size={16} /> Add to Cart
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h3 className="text-3xl font-bold text-berry mb-2 tracking-tighter">{product.name}</h3>
+                    <div className="flex items-center gap-4">
+                      <span className="text-[10px] font-bold text-berry/40 uppercase tracking-widest">{product.origin}</span>
+                      <div className="w-1 h-1 rounded-full bg-oven/40" />
+                      <span className="text-[10px] font-bold text-berry/40 uppercase tracking-widest">{product.roast} Roast</span>
+                    </div>
+                  </div>
+                  <span className="text-2xl font-bold text-oven tracking-tighter">₹{product.price}</span>
+                </div>
+
+                <p className="text-berry/60 text-sm leading-relaxed mb-8">
+                  {product.description}
+                </p>
+
+                <div className="flex items-center justify-between pt-8 border-t border-berry/10">
+                  <span className="text-[10px] font-bold text-berry/40 uppercase tracking-widest">{product.weight}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="flex">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <Star key={s} size={12} className="fill-oven text-oven" />
+                      ))}
+                    </div>
+                    <span className="text-sm font-bold text-berry">4.3</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Cart Sidebar */}
       <AnimatePresence>
@@ -185,21 +218,21 @@ export default function Shop() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsCartOpen(false)}
-              className="fixed inset-0 bg-berry/20 backdrop-blur-sm z-[100]"
+              className="fixed inset-0 bg-berry/40 backdrop-blur-sm z-[100]"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[101] p-12 flex flex-col"
+              className="fixed top-0 right-0 h-full w-full max-w-md bg-cream shadow-2xl z-[101] p-12 flex flex-col border-l border-berry/10"
             >
               <div className="flex justify-between items-center mb-16">
                 <div>
                   <h2 className="text-4xl font-display italic font-bold text-berry tracking-tighter">Your Cart</h2>
-                  <p className="text-sage text-sm uppercase tracking-widest font-bold mt-1">{cart.length} Items</p>
+                  <p className="text-berry/40 text-sm uppercase tracking-widest font-bold mt-1">{cart.length} Items</p>
                 </div>
-                <button onClick={() => setIsCartOpen(false)} className="p-4 bg-cream rounded-full text-berry/40 hover:text-berry transition-colors">
+                <button onClick={() => setIsCartOpen(false)} className="p-4 bg-berry/5 rounded-full text-berry/40 hover:text-berry transition-colors">
                   <X size={20} />
                 </button>
               </div>
@@ -208,17 +241,17 @@ export default function Shop() {
                 {cart.length === 0 ? (
                   <div className="py-20 text-center">
                     <ShoppingBag size={40} className="mx-auto text-berry/10 mb-6" />
-                    <p className="text-sage font-medium">Your cart is empty.</p>
+                    <p className="text-berry/60 font-medium">Your cart is empty.</p>
                   </div>
                 ) : (
                   cart.map((item) => (
                     <div key={item.id} className="flex justify-between items-center group">
                       <div className="flex-1">
                         <h4 className="text-xl font-bold text-berry mb-1">{item.name}</h4>
-                        <p className="text-sage text-sm font-medium">₹{item.price} <span className="text-berry/20">×</span> {item.quantity}</p>
+                        <p className="text-berry/40 text-sm font-medium">₹{item.price} <span className="text-oven/40">×</span> {item.quantity}</p>
                       </div>
                       <div className="flex items-center gap-6">
-                        <span className="text-xl font-bold text-berry">₹{item.price * item.quantity}</span>
+                        <span className="text-xl font-bold text-oven">₹{item.price * item.quantity}</span>
                         <button onClick={() => removeFromCart(item.id)} className="p-2 text-berry/20 hover:text-red-500 transition-colors">
                           <Trash2 size={16} />
                         </button>
@@ -229,15 +262,15 @@ export default function Shop() {
               </div>
 
               {cart.length > 0 && (
-                <div className="pt-12 border-t border-berry/5 mt-auto">
+                <div className="pt-12 border-t border-berry/10 mt-auto">
                   <div className="flex justify-between items-center mb-10">
                     <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40">Total Amount</span>
-                    <span className="text-4xl font-display italic font-bold text-berry">₹{totalAmount}</span>
+                    <span className="text-4xl font-display italic font-bold text-oven">₹{totalAmount}</span>
                   </div>
                   <button 
                     onClick={handleCheckout}
                     disabled={isCheckingOut}
-                    className="w-full py-6 bg-berry text-white rounded-[2rem] font-bold uppercase tracking-[0.3em] hover:bg-berry-light transition-all shadow-2xl shadow-berry/20 flex items-center justify-center gap-3 group disabled:opacity-50"
+                    className="w-full py-6 bg-oven text-white rounded-[2rem] font-bold uppercase tracking-[0.3em] hover:bg-oven-light transition-all shadow-2xl shadow-oven/20 flex items-center justify-center gap-3 group disabled:opacity-50"
                   >
                     {isCheckingOut ? "Processing..." : (
                       <>

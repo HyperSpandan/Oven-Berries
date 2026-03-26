@@ -37,6 +37,65 @@ const MagneticButton = ({ children, className }: { children: React.ReactNode; cl
   );
 };
 
+const ParallaxSection = ({ children, className, offset = 50 }: { children: React.ReactNode; className?: string; offset?: number }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y, opacity }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const SmoothImage = ({ src, className, alt }: { src: string; className?: string; alt?: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isLoaded ? 0 : 1 }}
+        className="absolute inset-0 bg-gray-100 z-10"
+      />
+      <motion.img
+        src={src}
+        alt={alt}
+        onLoad={() => setIsLoaded(true)}
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 1.1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="w-full h-full object-cover"
+        referrerPolicy="no-referrer"
+      />
+    </div>
+  );
+};
+
+const Reveal = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
+  return (
+    <div className={`relative overflow-hidden block ${className}`}>
+      <motion.div
+        initial={{ y: "100%" }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true, margin: "0px" }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+};
+
 export default function Home() {
   const heroRef = useRef(null);
   const showcaseRef = useRef(null);
@@ -95,10 +154,11 @@ export default function Home() {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-berry/10 text-[10px] font-bold uppercase tracking-[0.3em] text-berry mb-8">
-              Est. 2025 • Nanded
+              Est • 2025 • Nanded
             </span>
-            <h1 className="text-[18vw] md:text-[12vw] font-display italic font-black leading-[0.85] tracking-[-0.04em] mb-12 text-berry mix-blend-multiply">
-              Oven <br /> Berries
+            <h1 className="text-[18vw] md:text-[12vw] font-display italic font-black leading-[0.85] tracking-[-0.04em] mb-12 text-berry mix-blend-multiply flex flex-col items-center">
+              <Reveal delay={1.4}>Oven</Reveal>
+              <Reveal delay={1.6}>Berries</Reveal>
             </h1>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12">
@@ -122,6 +182,16 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-4"
+        >
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/40">Scroll</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-berry/40 to-transparent" />
+        </motion.div>
       </section>
 
       {/* Aesthetic Showcase */}
@@ -129,19 +199,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-5">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
+              <ParallaxSection offset={30}>
                 <h2 className="text-5xl md:text-7xl font-display italic font-bold leading-tight mb-8 text-berry">
-                  Crafted for <br /> the <span className="text-oven">Aesthetic</span> <br /> Soul.
+                  <Reveal>Crafted for</Reveal>
+                  <Reveal delay={0.1}>the <span className="text-oven">Aesthetic</span></Reveal>
+                  <Reveal delay={0.2}>Soul.</Reveal>
                 </h2>
                 <p className="text-xl text-sage font-medium leading-relaxed mb-12">
                   A sanctuary where minimal design meets artisanal excellence. We've curated every corner to be your perfect backdrop.
                 </p>
-                <div className="flex gap-12">
+                <div className="flex flex-wrap gap-8 md:gap-12">
                   <div>
                     <span className="text-4xl font-bold block mb-1 text-berry">8am</span>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-sage/60">Opening</span>
@@ -151,11 +218,11 @@ export default function Home() {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-sage/60">Closing</span>
                   </div>
                   <div>
-                    <span className="text-4xl font-bold block mb-1 text-berry">4.9</span>
+                    <span className="text-4xl font-bold block mb-1 text-berry">4.3</span>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-sage/60">Rating</span>
                   </div>
                 </div>
-              </motion.div>
+              </ParallaxSection>
             </div>
             
             <div className="lg:col-span-7 grid grid-cols-2 gap-6 perspective-1000">
@@ -181,18 +248,12 @@ export default function Home() {
       {/* Manual Brewing Video Section */}
       <section className="py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="mb-16"
-          >
+          <ParallaxSection offset={40}>
             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6 block">The Art of Brewing</span>
             <h2 className="text-4xl md:text-8xl font-display italic font-bold tracking-tighter leading-none">Manual Craftsmanship.</h2>
-          </motion.div>
+          </ParallaxSection>
           
-          <div className="relative aspect-video rounded-[4rem] overflow-hidden shadow-2xl bg-berry/5 group">
+          <div className="relative aspect-video rounded-[4rem] overflow-hidden shadow-2xl bg-berry/5 group mt-16">
             <video
               autoPlay
               loop
@@ -237,7 +298,7 @@ export default function Home() {
               whileHover={{ scale: 0.98 }}
               className="md:col-span-2 md:row-span-2 bg-oven/20 backdrop-blur-md border border-white/10 rounded-[3rem] p-12 flex flex-col justify-end relative overflow-hidden group"
             >
-              <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=1000" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-1000" referrerPolicy="no-referrer" />
+              <SmoothImage src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=1000" className="absolute inset-0 w-full h-full opacity-60 group-hover:scale-110 transition-transform duration-1000" alt="Wood-Fired Pizza" />
               <div className="relative z-10">
                 <Pizza size={40} className="mb-6 text-oven" />
                 <h3 className="text-4xl font-bold mb-4">Wood-Fired Pizzeria</h3>
@@ -252,9 +313,7 @@ export default function Home() {
               whileHover={{ scale: 0.98 }}
               className="md:col-span-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-[3rem] p-10 flex items-center gap-8 group overflow-hidden"
             >
-              <div className="w-32 h-32 rounded-2xl overflow-hidden shrink-0">
-                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover group-hover:scale-110 transition-all" referrerPolicy="no-referrer" />
-              </div>
+              <SmoothImage src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400" className="w-32 h-32 rounded-2xl shrink-0" alt="Speciality Coffee" />
               <div>
                 <h3 className="text-2xl font-bold mb-2">Speciality Coffee</h3>
                 <p className="text-white/60 text-sm">Ethically sourced, expertly roasted.</p>
