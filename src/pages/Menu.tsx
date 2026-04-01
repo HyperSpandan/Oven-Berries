@@ -13,7 +13,7 @@ const CATEGORIES = [
 
 const MOCK_MENU = [
   { id: 1, name: "Classic Espresso", price: 180, category: "coffee", description: "Rich and bold double shot espresso.", image: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&q=80&w=400" },
-  { id: 2, name: "Margherita Pizza", price: 450, category: "pizzeria", description: "Wood-fired with fresh basil and mozzarella.", image: "https://images.unsplash.com/photo-1574071318508-1cdbad80ad38?auto=format&fit=crop&q=80&w=400" },
+  { id: 2, name: "Margherita Pizza", price: 450, category: "pizzeria", description: "Wood-fired with fresh basil and mozzarella.", image: "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&q=80&w=800" },
   { id: 3, name: "Almond Croissant", price: 220, category: "bakery", description: "Flaky pastry filled with almond cream.", image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=400" },
   { id: 4, name: "Iced Caramel Latte", price: 280, category: "coffee", description: "Smooth espresso with caramel and cold milk.", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&q=80&w=400" },
   { id: 5, name: "Pepperoni Feast", price: 550, category: "pizzeria", description: "Loaded with spicy pepperoni and cheese.", image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&q=80&w=400" },

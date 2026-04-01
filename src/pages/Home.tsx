@@ -246,11 +246,11 @@ export default function Home() {
       </section>
 
       {/* Manual Brewing Video Section */}
-      <section className="py-32 bg-white overflow-hidden">
+      <section className="py-32 bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ParallaxSection offset={40}>
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6 block">The Art of Brewing</span>
-            <h2 className="text-4xl md:text-8xl font-display italic font-bold tracking-tighter leading-none">Manual Craftsmanship.</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/60 mb-6 block">The Art of Brewing</span>
+            <h2 className="text-4xl md:text-8xl font-display italic font-bold tracking-tighter leading-none text-berry">Manual Craftsmanship.</h2>
           </ParallaxSection>
           
           <div className="relative aspect-video rounded-[4rem] overflow-hidden shadow-2xl bg-berry/5 group mt-16">
@@ -357,15 +357,15 @@ export default function Home() {
       </section>
 
       {/* Coffee Beans Shop Preview */}
-      <section className="py-32 bg-white overflow-hidden">
+      <section className="py-32 bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-xl">
-              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6 block">The Shop</span>
-              <h2 className="text-5xl md:text-6xl font-display italic font-bold tracking-tighter leading-none">Take the <br /> Experience Home.</h2>
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-berry/60 mb-6 block">The Shop</span>
+              <h2 className="text-5xl md:text-6xl font-display italic font-bold tracking-tighter leading-none text-berry">Take the <br /> Experience Home.</h2>
             </div>
             <MagneticButton>
-              <Link to="/shop" className="px-10 py-5 border border-black rounded-full font-bold text-sm uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+              <Link to="/shop" className="px-10 py-5 border border-berry text-berry rounded-full font-bold text-sm uppercase tracking-widest hover:bg-berry hover:text-white transition-all">
                 Shop All Beans
               </Link>
             </MagneticButton>
@@ -381,7 +381,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="group cursor-pointer"
               >
-                <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-gray-50 mb-8 relative">
+                <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-berry/5 mb-8 relative">
                   <img 
                     src="/coffee_beans.png" 
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" 
@@ -389,13 +389,13 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                      <ArrowRight size={24} className="text-black" />
+                      <ArrowRight size={24} className="text-berry" />
                     </div>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Cottage Blend No. {i}</h3>
-                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Medium Roast • 250g</p>
-                <span className="text-xl font-bold">₹450</span>
+                <h3 className="text-2xl font-bold mb-2 text-berry">Cottage Blend No. {i}</h3>
+                <p className="text-sm font-bold text-sage/60 uppercase tracking-widest mb-4">Medium Roast • 250g</p>
+                <span className="text-xl font-bold text-berry">₹450</span>
               </motion.div>
             ))}
           </div>
@@ -403,28 +403,28 @@ export default function Home() {
       </section>
 
       {/* Footer / Location */}
-      <section className="py-32 bg-[#fafafa] border-t border-gray-100">
+      <section className="py-32 bg-cream border-t border-berry/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
             <div>
-              <h2 className="text-5xl md:text-6xl font-display italic font-bold tracking-tighter mb-12">Visit Us</h2>
+              <h2 className="text-5xl md:text-6xl font-display italic font-bold tracking-tighter mb-12 text-berry">Visit Us</h2>
               <div className="space-y-12">
                 <div className="flex gap-8">
-                  <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-berry/10 text-berry rounded-2xl flex items-center justify-center shrink-0">
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Location</h4>
-                    <p className="text-xl font-medium max-w-xs">ANAND NAGAR, NANDED, MAHARASTRA</p>
+                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-berry/60 mb-2">Location</h4>
+                    <p className="text-xl font-medium max-w-xs text-berry">ANAND NAGAR, NANDED, MAHARASTRA</p>
                   </div>
                 </div>
                 <div className="flex gap-8">
-                  <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-berry/10 text-berry rounded-2xl flex items-center justify-center shrink-0">
                     <Clock size={20} />
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Hours</h4>
-                    <p className="text-xl font-medium">8:00 AM – 11:30 PM <br /> <span className="text-gray-400">Open Everyday</span></p>
+                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-berry/60 mb-2">Hours</h4>
+                    <p className="text-xl font-medium text-berry">8:00 AM – 11:30 PM <br /> <span className="text-sage/60">Open Everyday</span></p>
                   </div>
                 </div>
               </div>
